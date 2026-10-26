@@ -21,12 +21,21 @@
     scroll-behavior: smooth;
     background-color: #070504;
     color: #f6e9e1;
+    /* Prevent horizontal scroll on any viewport width */
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   body {
     overflow-x: hidden;
+    max-width: 100%;
     background-color: #070504;
     color: #f6e9e1;
+  }
+
+  /* Global box-sizing so padding never causes overflow */
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
 
   /* Custom scrollbar */
@@ -139,4 +148,33 @@
     left: 140%;
     opacity: 1;
   }
+}
+
+/* ─── Review card overflow safety ──────────────────────────────────────────── */
+
+/* Card container — prevent any child from causing horizontal scroll */
+.review-card {
+  overflow: hidden;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Review text: clamped to 4 lines with ellipsis, wraps any unbroken string */
+.review-card__text {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  min-width: 0;
+}
+
+/* Reviewer name and service label — truncate + safe wrapping */
+.review-card__name,
+.review-card__label {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  min-width: 0;
 }

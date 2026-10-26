@@ -95,26 +95,28 @@ export const AudioVoiceInput: React.FC<AudioVoiceInputProps> = ({ onTranscript, 
 
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
-      <div className="flex items-center gap-2">
-        {/* Language selector */}
+      {/* flex-wrap so the two controls break to a second line on very narrow screens */}
+      <div className="flex flex-wrap items-center gap-2">
+        {/* Language selector — min-w-0 prevents it from pushing outside its container */}
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value as any)}
           disabled={isListening}
           aria-label="Speech recognition language"
-          className="bg-[#140e0b] text-[#f6e9e1] text-xs rounded-lg px-2.5 py-1.5 border border-[#c8714d]/30 focus:border-[#f0a07a] focus:outline-none cursor-pointer"
+          className="min-w-0 bg-[#140e0b] text-[#f6e9e1] text-xs rounded-lg px-2.5 py-1.5 border border-[#c8714d]/30 focus:border-[#f0a07a] focus:outline-none cursor-pointer"
+          style={{ maxWidth: '100%', textOverflow: 'ellipsis' }}
         >
           <option value="en-IN">English (India)</option>
           <option value="ta-IN">Tamil (தமிழ்)</option>
           <option value="hi-IN">Hindi (हिन्दी)</option>
         </select>
 
-        {/* Mic Toggle Button */}
+        {/* Mic Toggle Button — flex-shrink-0 keeps it from being squished */}
         <button
           type="button"
           onClick={toggleListening}
           aria-label={isListening ? 'Stop voice recording' : 'Start voice recording'}
-          className={`relative flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
+          className={`flex-shrink-0 relative flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
             isListening
               ? 'bg-red-500/20 text-red-400 border border-red-500/60 shadow-[0_0_15px_rgba(239,68,68,0.4)]'
               : 'bg-[#18110c] hover:bg-[#251a14] text-[#f0a07a] border border-[#c8714d]/40'

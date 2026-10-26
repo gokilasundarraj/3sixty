@@ -9,6 +9,9 @@ export interface FeedbackItem {
   rating: number; // 1 to 5
   message: string;
   projectType: string;
+  /** Project proof / screenshot URLs — empty array for old reviews */
+  projectImages?: string[];
+  /** Legacy field — no longer used in card body UI */
   imageUrl?: string;
   status?: 'pending' | 'approved' | 'hidden';
   createdAt?: string;

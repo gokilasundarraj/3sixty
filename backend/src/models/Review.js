@@ -6,6 +6,7 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      maxlength: [60, 'Name must be 60 characters or fewer.'],
     },
     phone: {
       type: String,
@@ -14,6 +15,7 @@ const reviewSchema = new mongoose.Schema(
       trim: true,
       index: true,
     },
+    // Profile avatar URL (Cloudinary) — shown only in the small avatar circle
     userAvatar: {
       type: String,
       default: '',
@@ -28,11 +30,18 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      maxlength: [1000, 'Review must be 1000 characters or fewer.'],
     },
     projectType: {
       type: String,
       default: 'Customer Review',
     },
+    // Project proof / screenshot URLs (Cloudinary) — array of up to 5
+    projectImages: {
+      type: [String],
+      default: [],
+    },
+    // Legacy field kept for backwards compatibility; no longer set to avatar URL
     imageUrl: {
       type: String,
       default: '',
