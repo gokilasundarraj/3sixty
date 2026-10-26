@@ -167,10 +167,10 @@ export const FeedbackSection: React.FC = () => {
     if (!cleanName) { setErrorMessage('Please enter your full name.'); return; }
     if (cleanName.length > MAX_NAME) { setErrorMessage(`Name must be ${MAX_NAME} characters or fewer.`); return; }
 
-    const cleanPhone = phone.trim();
+    const cleanPhone = phone.replace(/\D/g, '');
     if (!cleanPhone) { setErrorMessage('Please enter your contact phone number.'); return; }
-    if (cleanPhone.replace(/\D/g, '').length < 7) {
-      setErrorMessage('Please enter a valid phone number (at least 7 digits).');
+    if (cleanPhone.length !== 10) {
+      setErrorMessage('Please enter a valid 10-digit phone number.');
       return;
     }
 
@@ -371,17 +371,29 @@ export const FeedbackSection: React.FC = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#b99a8b] mb-2">
-                    Phone Number <span className="text-[#f0a07a]">*</span>
-                  </label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#b99a8b]">
+                      Phone Number <span className="text-[#f0a07a]">*</span>
+                    </label>
+                    <span className="text-[10px] text-[#8a6857] font-mono">
+                      {phone.length}/10
+                    </span>
+                  </div>
                   <div className="relative">
                     <FiPhone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a6857]" />
                     <input
                       type="tel"
+                      inputMode="numeric"
+                      pattern="[0-9]{10}"
+                      maxLength={10}
                       required
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="e.g. +91 98765 43210"
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                        setPhone(val);
+                        if (errorMessage) setErrorMessage(null);
+                      }}
+                      placeholder="10-digit mobile number"
                       className="w-full pl-11 pr-4 py-3 bg-[#0b0705] border border-[#c8714d]/30 focus:border-[#f0a07a] rounded-xl text-sm text-[#f6e9e1] placeholder-[#62473a] outline-none transition-all"
                     />
                   </div>

@@ -9,9 +9,14 @@ export const createCallback = async (req, res, next) => {
       return errorResponse(res, 'Name, phone number, and project type are required.', 400);
     }
 
+    const cleanPhone = String(phone || '').replace(/\D/g, '');
+    if (cleanPhone.length !== 10) {
+      return errorResponse(res, 'Please provide a valid 10-digit phone number.', 400);
+    }
+
     const callback = await Callback.create({
       name: name.trim(),
-      phone: phone.trim(),
+      phone: cleanPhone,
       email: email ? email.toLowerCase().trim() : '',
       projectType,
       message: message ? message.trim() : '',

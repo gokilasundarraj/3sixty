@@ -55,8 +55,8 @@ export const createReview = async (req, res, next) => {
       return errorResponse(res, 'Phone number is required.', 400);
     }
     const cleanPhone = normalizePhone(phone);
-    if (cleanPhone.length < 7) {
-      return errorResponse(res, 'Please enter a valid phone number.', 400);
+    if (cleanPhone.length !== 10) {
+      return errorResponse(res, 'Please enter a valid 10-digit phone number.', 400);
     }
 
     // ── Duplicate check ──────────────────────────────────────────────────────

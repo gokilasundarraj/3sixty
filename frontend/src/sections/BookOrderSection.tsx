@@ -21,13 +21,19 @@ export const BookOrderSection: React.FC = () => {
       return;
     }
 
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (cleanPhone.length !== 10) {
+      setError('Please enter a valid 10-digit phone number.');
+      return;
+    }
+
     try {
       setSubmitting(true);
       setError(null);
 
       const res = await callbackService.submitCallback({
         name: name.trim(),
-        phone: phone.trim(),
+        phone: cleanPhone,
         projectType,
         message: message.trim() || undefined,
       });
@@ -38,9 +44,6 @@ export const BookOrderSection: React.FC = () => {
       } else {
         setError(res.message || 'Unable to save request. Please contact us directly.');
       }
-
-      setSubmitted(true);
-      setMessage('');
     } catch (err) {
       console.error('Call back submit error:', err);
       setError('Unable to save request. Please call or WhatsApp us directly.');
@@ -158,15 +161,27 @@ export const BookOrderSection: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#b99a8b] mb-1.5">
-                        Phone / WhatsApp Number *
-                      </label>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#b99a8b]">
+                          Phone / WhatsApp Number *
+                        </label>
+                        <span className="text-[10px] text-[#8a6857] font-mono">
+                          {phone.length}/10
+                        </span>
+                      </div>
                       <input
                         type="tel"
+                        inputMode="numeric"
+                        pattern="[0-9]{10}"
+                        maxLength={10}
                         required
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        placeholder="+91 98400 00000"
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                          setPhone(val);
+                          if (error) setError(null);
+                        }}
+                        placeholder="10-digit mobile number"
                         className="w-full bg-[#140e0b] text-[#f6e9e1] placeholder-[#6e5346] text-xs sm:text-sm rounded-xl px-4 py-3 border border-[#c8714d]/30 focus:border-[#f0a07a] focus:outline-none"
                       />
                     </div>
