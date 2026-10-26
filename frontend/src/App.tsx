@@ -42,6 +42,7 @@ export function App() {
       <ScrollProgress />
       <Navbar />
 
+
       <main>
         <HeroSection />
         <MarqueeSection />
