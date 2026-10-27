@@ -37,7 +37,7 @@ export const Preloader: React.FC<{ onComplete?: () => void }> = ({ onComplete })
               initial={{ opacity: 0, scale: 0.85, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-48 sm:w-56 h-auto"
+              className="relative w-48 sm:w-56 h-auto overflow-hidden rounded-2xl"
             >
               <img
                 src="/logo.png"

@@ -216,7 +216,7 @@ export const TestimonialsSection: React.FC = () => {
   return (
     <>
       <section id="testimonials" className="relative py-24 bg-[#0a0705] select-none">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1536px] mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1c120c] border border-[#c8714d]/40 text-[#f0a07a] text-xs font-semibold uppercase tracking-widest">

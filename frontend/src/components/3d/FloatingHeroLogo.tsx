@@ -4,16 +4,18 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 export const FloatingHeroLogo: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [spotlightPos, setSpotlightPos] = useState({ x: 50, y: 50 });
 
-  // Smooth mouse tilt
+  // Subtle, smooth 3D tilt
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
+  // Soft spring for ultra-smooth responsiveness without jitter
+  const mouseXSpring = useSpring(x, { stiffness: 90, damping: 25 });
+  const mouseYSpring = useSpring(y, { stiffness: 90, damping: 25 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['14deg', '-14deg']);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-14deg', '14deg']);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['6deg', '-6deg']);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-6deg', '6deg']);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -22,98 +24,87 @@ export const FloatingHeroLogo: React.FC = () => {
     const height = rect.height;
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
+
     const xPct = mouseX / width - 0.5;
     const yPct = mouseY / height - 0.5;
     x.set(xPct);
     y.set(yPct);
+
+    setSpotlightPos({
+      x: Math.round((mouseX / width) * 100),
+      y: Math.round((mouseY / height) * 100),
+    });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
     x.set(0);
     y.set(0);
+    setSpotlightPos({ x: 50, y: 50 });
   };
 
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative flex items-center justify-center py-6 perspective-1000 cursor-pointer select-none"
+      className="relative flex items-center justify-center py-4 w-full max-w-[440px] sm:max-w-[480px] lg:max-w-[500px] xl:max-w-[540px] select-none"
       style={{ perspective: 1200 }}
     >
-      {/* Soft Rose-Copper Bloom / Atmospheric Glow */}
-      <motion.div
-        animate={{
-          scale: isHovered ? [1.1, 1.25, 1.1] : [1, 1.12, 1],
-          opacity: isHovered ? 0.75 : 0.45,
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 4.5,
-          ease: 'easeInOut',
-        }}
-        className="absolute w-[360px] h-[360px] sm:w-[500px] sm:h-[500px] rounded-full blur-[90px] bg-gradient-to-tr from-[#934825] via-[#f0a07a] to-[#ffc7a6] pointer-events-none -z-10"
+      {/* Ambient Rose-Copper Bloom (Smooth GPU breathing aura) */}
+      <div
+        className="absolute w-[300px] h-[300px] sm:w-[440px] sm:h-[440px] rounded-full blur-[80px] sm:blur-[110px] bg-gradient-to-tr from-[#934825]/60 via-[#c8714d]/50 to-[#ffc7a6]/40 pointer-events-none -z-10 animate-glow-gpu"
       />
 
-      {/* Floating 3D Container */}
+      {/* Tilt Layer (Only handles mouse rotation — separated from float translation) */}
       <motion.div
         style={{
           rotateX,
           rotateY,
           transformStyle: 'preserve-3d',
         }}
-        animate={{
-          y: [-8, 8, -8],
-          rotateZ: [-0.5, 0.5, -0.5]
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 6,
-          ease: 'easeInOut',
-        }}
-        className="relative group p-4 sm:p-6 rounded-3xl"
+        className="w-full"
       >
-        {/* Subtle glass pedestal */}
-        <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-[rgba(240,160,122,0.12)] to-[rgba(7,5,4,0.6)] backdrop-blur-sm border border-[rgba(240,160,122,0.2)] shadow-2xl opacity-80 group-hover:border-[rgba(240,160,122,0.5)] transition-all duration-500" />
+        {/* Floating Layer (GPU-accelerated pure CSS animation — 60fps buttery smooth) */}
+        <div className="animate-float-gpu relative group">
+          
+          {/* Main Showcase Plaque Card */}
+          <div className="relative rounded-3xl p-3 sm:p-4 bg-gradient-to-b from-[#18100b] via-[#100a07] to-[#080504] border border-[#c8714d]/40 shadow-[0_25px_60px_-12px_rgba(200,113,77,0.35)] transition-all duration-500 group-hover:border-[#f0a07a]/80 group-hover:shadow-[0_30px_70px_-10px_rgba(240,160,122,0.45)] overflow-hidden">
+            
+            {/* Subtle inner bevel / hairline rim */}
+            <div className="absolute inset-0 rounded-3xl pointer-events-none border border-white/5" />
+            
+            {/* Logo Image */}
+            <div className="relative rounded-2xl overflow-hidden bg-[#0d0806] flex items-center justify-center">
+              <img
+                src="/logo.png"
+                alt="3 Sixtey — Project and Media Solution"
+                className="w-full h-auto object-contain rounded-2xl filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/logo-original.jpg';
+                }}
+              />
 
-        {/* Shiny sweep highlight */}
-        <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
-          <motion.div
-            initial={{ x: '-150%' }}
-            animate={{ x: '200%' }}
-            transition={{
-              duration: 2.4,
-              repeat: Infinity,
-              repeatDelay: 5,
-              ease: 'easeInOut',
-            }}
-            className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-25deg]"
-          />
+              {/* Dynamic Interactive Specular Lighting (Tracks cursor naturally) */}
+              <div
+                className="absolute inset-0 pointer-events-none transition-opacity duration-500 rounded-2xl"
+                style={{
+                  opacity: isHovered ? 0.35 : 0.15,
+                  background: `radial-gradient(circle 320px at ${spotlightPos.x}% ${spotlightPos.y}%, rgba(255, 215, 185, 0.6), transparent 70%)`,
+                }}
+              />
+            </div>
+
+            {/* Bottom Accent Glow */}
+            <div className="absolute bottom-0 left-1/4 right-1/4 h-1 bg-gradient-to-r from-transparent via-[#f0a07a]/70 to-transparent blur-sm pointer-events-none" />
+          </div>
+
         </div>
-
-        {/* Logo Image */}
-        <motion.img
-          src="/logo.png"
-          alt="3 Sixtey — Project and Media Solution"
-          className="relative z-10 w-64 sm:w-80 md:w-96 lg:w-[440px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(240,160,122,0.4)]"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
-          onError={(e) => {
-            // fallback to original image if transparent png has issue
-            (e.target as HTMLImageElement).src = '/logo-original.jpg';
-          }}
-        />
-
-        {/* Interactive Radial Spotlight */}
-        <div
-          className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{
-            background: 'radial-gradient(circle at 50% 50%, rgba(255, 199, 166, 0.15), transparent 70%)',
-          }}
-        />
       </motion.div>
     </div>
   );

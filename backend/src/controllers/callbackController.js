@@ -1,12 +1,18 @@
 import Callback from '../models/Callback.js';
 import { successResponse, errorResponse } from '../common/responseHelper.js';
+import { validateName } from '../common/validators.js';
 
 export const createCallback = async (req, res, next) => {
   try {
     const { name, phone, email, projectType, message } = req.body;
 
-    if (!name || !phone || !projectType) {
-      return errorResponse(res, 'Name, phone number, and project type are required.', 400);
+    const nameValidation = validateName(name);
+    if (!nameValidation.isValid) {
+      return errorResponse(res, nameValidation.error || 'Please enter a valid full name.', 400);
+    }
+
+    if (!phone || !projectType) {
+      return errorResponse(res, 'Phone number and project type are required.', 400);
     }
 
     const cleanPhone = String(phone || '').replace(/\D/g, '');

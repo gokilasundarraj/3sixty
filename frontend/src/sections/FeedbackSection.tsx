@@ -3,6 +3,7 @@ import { FaStar } from 'react-icons/fa';
 import { FiUser, FiPhone, FiCamera, FiX, FiSend, FiCheckCircle, FiImage } from 'react-icons/fi';
 import { reviewService } from '../services/reviewService';
 import { AudioVoiceInput } from '../components/common/AudioVoiceInput';
+import { validateName, validatePhone } from '../lib/validators';
 
 const RATING_LABELS: Record<number, string> = {
   1: 'Poor',
@@ -163,16 +164,19 @@ export const FeedbackSection: React.FC = () => {
     setErrorMessage(null);
     setColdStart(false);
 
-    const cleanName = customerName.trim();
-    if (!cleanName) { setErrorMessage('Please enter your full name.'); return; }
-    if (cleanName.length > MAX_NAME) { setErrorMessage(`Name must be ${MAX_NAME} characters or fewer.`); return; }
-
-    const cleanPhone = phone.replace(/\D/g, '');
-    if (!cleanPhone) { setErrorMessage('Please enter your contact phone number.'); return; }
-    if (cleanPhone.length !== 10) {
-      setErrorMessage('Please enter a valid 10-digit phone number.');
+    const nameValidation = validateName(customerName);
+    if (!nameValidation.isValid) {
+      setErrorMessage(nameValidation.error || 'Please enter a valid full name.');
       return;
     }
+    const cleanName = customerName.trim();
+
+    const phoneValidation = validatePhone(phone);
+    if (!phoneValidation.isValid) {
+      setErrorMessage(phoneValidation.error || 'Please enter a valid 10-digit phone number.');
+      return;
+    }
+    const cleanPhone = phone.replace(/\D/g, '');
 
     const cleanMessage = message.trim();
     if (!cleanMessage) { setErrorMessage('Please write your review feedback.'); return; }
@@ -243,7 +247,7 @@ export const FeedbackSection: React.FC = () => {
 
   return (
     <section id="feedback-form" className="relative py-20 bg-[#070504] border-t border-[#c8714d]/15 select-none">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-4xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
         {/* Section Header */}
         <div className="text-center mb-10 space-y-3">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1c120c] border border-[#c8714d]/40 text-[#f0a07a] text-xs font-semibold uppercase tracking-widest shadow-sm">
@@ -266,14 +270,14 @@ export const FeedbackSection: React.FC = () => {
 
           {submitted ? (
             /* Success */
-            <div className="text-center py-8 space-y-6 max-w-md mx-auto">
-              <div className="w-16 h-16 rounded-full bg-emerald-950/60 border border-emerald-500/50 flex items-center justify-center mx-auto text-emerald-400 shadow-xl">
+            <div className="text-center py-8 space-y-6 max-w-md mx-auto w-full px-2 min-w-0">
+              <div className="w-16 h-16 rounded-full bg-emerald-950/60 border border-emerald-500/50 flex items-center justify-center mx-auto text-emerald-400 shadow-xl flex-shrink-0">
                 <FiCheckCircle className="w-8 h-8" />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 min-w-0 max-w-full">
                 <h3 className="font-serif text-2xl font-bold text-[#f6e9e1]">Review Submitted!</h3>
-                <p className="text-xs sm:text-sm text-[#b99a8b] leading-relaxed">
-                  Thank you, <strong className="text-[#ffc7a6]">{customerName}</strong>! Your review has been published directly to our customer testimonials wall.
+                <p className="text-xs sm:text-sm text-[#b99a8b] leading-relaxed break-words" style={{ overflowWrap: 'anywhere' }}>
+                  Thank you, <strong className="text-[#ffc7a6] break-all">{customerName}</strong>! Your review has been published directly to our customer feedback wall.
                 </p>
               </div>
               <div className="flex items-center justify-center gap-1.5 text-[#f0a07a]">
@@ -362,9 +366,13 @@ export const FeedbackSection: React.FC = () => {
                     <input
                       type="text"
                       required
+                      autoComplete="name"
                       maxLength={MAX_NAME}
                       value={customerName}
-                      onChange={(e) => setCustomerName(e.target.value)}
+                      onChange={(e) => {
+                        setCustomerName(e.target.value);
+                        if (errorMessage) setErrorMessage(null);
+                      }}
                       placeholder="e.g. Karthik Raja"
                       className="w-full pl-11 pr-4 py-3 bg-[#0b0705] border border-[#c8714d]/30 focus:border-[#f0a07a] rounded-xl text-sm text-[#f6e9e1] placeholder-[#62473a] outline-none transition-all"
                     />

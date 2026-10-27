@@ -14,7 +14,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ selectedServ
   const whatsappUrl = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(defaultMsg)}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 select-none">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-3 select-none">
       {/* Tooltip */}
       {showTooltip && (
         <div className="hidden sm:block px-3 py-1.5 rounded-lg bg-[#0e0a08]/95 border border-[rgba(240,160,122,0.3)] text-[#f6e9e1] text-xs font-medium shadow-xl backdrop-blur-md animate-fade-in pointer-events-none">

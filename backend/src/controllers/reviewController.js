@@ -1,6 +1,7 @@
 import Review from '../models/Review.js';
 import { successResponse, errorResponse } from '../common/responseHelper.js';
 import { uploadToCloudinary } from '../middleware/upload.js';
+import { validateName } from '../common/validators.js';
 
 const MAX_NAME_LEN = 60;
 const MAX_MSG_LEN = 1000;
@@ -43,11 +44,9 @@ export const createReview = async (req, res, next) => {
     const { userName, phone, rating, message, projectType } = req.body;
 
     // ── Name validation ──────────────────────────────────────────────────────
-    if (!userName || !userName.trim()) {
-      return errorResponse(res, 'Name is required.', 400);
-    }
-    if (userName.trim().length > MAX_NAME_LEN) {
-      return errorResponse(res, `Name must be ${MAX_NAME_LEN} characters or fewer.`, 400);
+    const nameValidation = validateName(userName);
+    if (!nameValidation.isValid) {
+      return errorResponse(res, nameValidation.error || 'Please enter a valid full name.', 400);
     }
 
     // ── Phone validation ─────────────────────────────────────────────────────

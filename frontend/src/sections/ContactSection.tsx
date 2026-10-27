@@ -9,7 +9,7 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section id="contact" className="relative py-24 bg-[#070504] border-t border-[#c8714d]/15 select-none">
-      <div className="max-w-100% mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1536px] mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
@@ -26,7 +26,7 @@ export const ContactSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl lg:max-w-5xl mx-auto">
 
           {/* Card 1: WhatsApp Chat */}
           <div className="p-8 rounded-2xl bg-[#110c08] border border-[#25D366]/40 hover:border-[#25D366] transition-all duration-300 flex flex-col justify-between space-y-6 shadow-[0_10px_30px_rgba(37,211,102,0.1)]">

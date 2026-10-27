@@ -39,7 +39,7 @@ export const Navbar: React.FC = () => {
           : 'bg-transparent py-4 sm:py-5'
       }`}
     >
-      <div className="max-w-100% mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="w-full max-w-[1536px] mx-auto px-6 sm:px-8 md:px-12 lg:px-16 flex items-center justify-between">
         {/* Brand Logo & Tagline */}
         <a
           href="#"

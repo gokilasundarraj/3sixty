@@ -4,6 +4,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { FiCheck, FiSend, FiClock, FiShield } from 'react-icons/fi';
 import { callbackService } from '../services/callbackService';
 import { BRAND } from '../lib/constants';
+import { validateName, validatePhone } from '../lib/validators';
 
 export const BookOrderSection: React.FC = () => {
   const [name, setName] = useState('');
@@ -16,16 +17,19 @@ export const BookOrderSection: React.FC = () => {
 
   const handleCallbackSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim()) {
-      setError('Please provide your name and contact phone number.');
+
+    const nameValidation = validateName(name);
+    if (!nameValidation.isValid) {
+      setError(nameValidation.error || 'Please enter a valid full name.');
       return;
     }
 
-    const cleanPhone = phone.replace(/\D/g, '');
-    if (cleanPhone.length !== 10) {
-      setError('Please enter a valid 10-digit phone number.');
+    const phoneValidation = validatePhone(phone);
+    if (!phoneValidation.isValid) {
+      setError(phoneValidation.error || 'Please enter a valid 10-digit phone number.');
       return;
     }
+    const cleanPhone = phone.replace(/\D/g, '');
 
     try {
       setSubmitting(true);
@@ -54,7 +58,7 @@ export const BookOrderSection: React.FC = () => {
 
   return (
     <section id="book" className="relative py-24 bg-[#0a0705] border-t border-[#c8714d]/15 select-none">
-      <div className="max-w-100% sm:px-6 lg:px-8 ">
+      <div className="w-full max-w-[1536px] mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
@@ -132,8 +136,8 @@ export const BookOrderSection: React.FC = () => {
                   <h4 className="font-serif text-lg font-bold text-emerald-200">
                     Call Back Requested Successfully!
                   </h4>
-                  <p className="text-xs text-emerald-300 max-w-md mx-auto">
-                    Thank you, {name}. Our engineering lead has received your request and will call you on <strong>{phone}</strong> shortly.
+                  <p className="text-xs text-emerald-300 max-w-md mx-auto break-words" style={{ overflowWrap: 'anywhere' }}>
+                    Thank you, <strong className="text-emerald-100 break-all">{name}</strong>. Our engineering lead has received your request and will call you on <strong>{phone}</strong> shortly.
                   </p>
                   <button
                     type="button"
@@ -153,8 +157,13 @@ export const BookOrderSection: React.FC = () => {
                       <input
                         type="text"
                         required
+                        autoComplete="name"
+                        maxLength={50}
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => {
+                          setName(e.target.value);
+                          if (error) setError(null);
+                        }}
                         placeholder="e.g. Karthik Raja"
                         className="w-full bg-[#140e0b] text-[#f6e9e1] placeholder-[#6e5346] text-xs sm:text-sm rounded-xl px-4 py-3 border border-[#c8714d]/30 focus:border-[#f0a07a] focus:outline-none"
                       />

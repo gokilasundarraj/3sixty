@@ -144,46 +144,46 @@ export const ServicesSection: React.FC = () => {
 
   return (
     <section id="services" className="relative py-24 bg-[#0a0705] select-none">
-      <div className="max-w-100% mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1536px] mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1c120c] border border-[#c8714d]/40 text-[#f0a07a] text-xs font-semibold uppercase tracking-widest">
-            <FiCode className="w-4 h-4 text-[#ffc7a6]" />
-            <span>Complete Dual Agency Capabilities</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1c120c] border border-[#c8714d]/40 text-[#f0a07a] text-xs font-semibold uppercase tracking-widest max-w-full">
+            <FiCode className="w-4 h-4 text-[#ffc7a6] flex-shrink-0" />
+            <span className="truncate">Complete Dual Agency Capabilities</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#f6e9e1] tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#f6e9e1] tracking-tight break-words">
             Our Core <span className="text-copper-gradient">Services</span>
           </h2>
 
-          <p className="text-sm sm:text-base text-[#b99a8b] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#b99a8b] leading-relaxed break-words">
             High-standard engineering solutions tailored for college students, combined with studio-grade video editing, 3D animation, and design for creators and businesses.
           </p>
 
           {/* Toggle Tab */}
           <div className="pt-4 flex items-center justify-center">
-            <div className="inline-flex p-1.5 rounded-2xl bg-[#120d0a] border border-[#c8714d]/30">
+            <div className="flex flex-col sm:flex-row w-full sm:w-auto max-w-full p-1.5 rounded-2xl bg-[#120d0a] border border-[#c8714d]/30 gap-1.5 sm:gap-0">
               <button
                 type="button"
                 onClick={() => setActiveTab('projects')}
-                className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${activeTab === 'projects'
+                className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 w-full sm:w-auto ${activeTab === 'projects'
                   ? 'btn-copper shadow-md'
                   : 'text-[#b99a8b] hover:text-[#f6e9e1]'
                   }`}
               >
-                <PiGraduationCapFill className="w-4 h-4" />
+                <PiGraduationCapFill className="w-4 h-4 flex-shrink-0" />
                 <span>Project Solutions (Students)</span>
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab('media')}
-                className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${activeTab === 'media'
+                className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 w-full sm:w-auto ${activeTab === 'media'
                   ? 'btn-copper shadow-md'
                   : 'text-[#b99a8b] hover:text-[#f6e9e1]'
                   }`}
               >
-                <MdMovieEdit className="w-4 h-4" />
+                <MdMovieEdit className="w-4 h-4 flex-shrink-0" />
                 <span>Media Solutions (Video & 3D)</span>
               </button>
             </div>

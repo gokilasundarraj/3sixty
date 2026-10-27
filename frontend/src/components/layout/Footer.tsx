@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
       {/* Ambient glow in footer background */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-gradient-to-b from-[#f0a07a]/10 to-transparent blur-3xl pointer-events-none" />
 
-      <div className="max-w-100% mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1536px] mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-14 border-b border-[#c8714d]/15">
           {/* Brand Info */}
           <div className="space-y-4">
