@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
                 <FaWhatsapp className="w-4 h-4" />
               </a>
               <a
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(BRAND.email)}&su=${encodeURIComponent('Project / Media Solution Inquiry - 3 Sixtey')}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(BRAND.email)}&su=${encodeURIComponent('Project / Media Solution Inquiry - 3 Sixty')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Send Email via Gmail"
@@ -134,7 +134,7 @@ export const Footer: React.FC = () => {
               <div className="flex items-start gap-2.5">
                 <FaWhatsapp className="w-4 h-4 text-[#25D366] mt-0.5 flex-shrink-0" />
                 <a
-                  href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent('Hi 3 Sixtey, I want to discuss a project or media requirement.')}`}
+                  href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent('Hi 3 Sixty, I want to discuss a project or media requirement.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#25D366] transition-colors"
@@ -145,7 +145,7 @@ export const Footer: React.FC = () => {
               <div className="flex items-start gap-2.5">
                 <MdEmail className="w-4 h-4 text-[#f0a07a] mt-0.5 flex-shrink-0" />
                 <a
-                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(BRAND.email)}&su=${encodeURIComponent('Project / Media Solution Inquiry - 3 Sixtey')}`}
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(BRAND.email)}&su=${encodeURIComponent('Project / Media Solution Inquiry - 3 Sixty')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#f6e9e1] transition-colors"
