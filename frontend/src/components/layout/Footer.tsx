@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-serif text-xl font-bold text-copper-gradient">
-                  3 Sixtey
+                  3 Sixty
                 </h3>
                 <p className="text-[11px] uppercase tracking-wider text-[#b99a8b] font-mono">
                   Project & Media Solution
