@@ -164,7 +164,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Credits & Legal */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#b99a8b]">
           <p>
-            &copy; {new Date().getFullYear()} {BRAND.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {BRAND.name}.
           </p>
 
           {/* REQUIRED EXACT ATTRIBUTION */}
