@@ -92,7 +92,7 @@ export const Navbar: React.FC = () => {
         {/* Right Action: WhatsApp */}
         <div className="flex items-center gap-3">
           <a
-            href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent('Hi 3 Sixtey, I want to discuss a project / media requirement.')}`}
+            href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent('Hi 3 Sixty, I want to discuss a project / media requirement.')}`}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Contact on WhatsApp"
