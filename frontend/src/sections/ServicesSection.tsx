@@ -45,7 +45,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, category }) => {
   const Icon = getIcon();
 
   const whatsappUrl = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
-    `Hi 3 Sixtey, I want to order "${service.title}" under ${category}. Please send details and package pricing.`
+    `Hi 3 Sixty, I want to order "${service.title}" under ${category}. Please send details and package pricing.`
   )}`;
 
   return (
