@@ -10,7 +10,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ selectedServ
   const [showTooltip, setShowTooltip] = useState(false);
 
   const serviceText = selectedService || 'College Project & Media Solutions';
-  const defaultMsg = `Hi 3 Sixtey, I am interested in ${serviceText}. Please share details and pricing.`;
+  const defaultMsg = `Hi 3 Sixty, I am interested in ${serviceText}. Please share details and pricing.`;
   const whatsappUrl = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(defaultMsg)}`;
 
   return (
