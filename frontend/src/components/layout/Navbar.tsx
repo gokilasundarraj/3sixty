@@ -63,7 +63,7 @@ export const Navbar: React.FC = () => {
 
           <div className="flex flex-col">
             <span className="font-serif text-lg sm:text-xl font-bold tracking-tight text-copper-gradient">
-              3 Sixtey
+              3 Sixty
             </span>
             <span className="text-[10px] sm:text-[11px] tracking-wider text-[#b99a8b] uppercase font-mono -mt-1 hidden sm:inline-block">
               Project & Media Solution
