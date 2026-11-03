@@ -1,8 +1,8 @@
 import { DepartmentProjectIdea } from '../types';
 
 export const BRAND = {
-  name: '3 Sixtey',
-  fullName: '3 Sixtey – Project and Media Solution',
+  name: '3 Sixty',
+  fullName: '3 Sixty – Project and Media Solution',
   tagline: 'Project and Media Solution',
   phone: '+919025132379',
   phoneDisplay: '+91 9025132379',
