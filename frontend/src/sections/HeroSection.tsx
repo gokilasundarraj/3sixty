@@ -98,7 +98,7 @@ export const HeroSection: React.FC = () => {
               </a>
 
               <a
-                href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent('Hi 3 Sixtey, I want to discuss a project / media requirement.')}`}
+                href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent('Hi 3 Sixty, I want to discuss a project / media requirement.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#1b2b1d] hover:bg-[#233826] border border-[#25D366]/50 text-[#25D366] text-sm font-semibold transition-all hover:scale-105 shadow-sm"
