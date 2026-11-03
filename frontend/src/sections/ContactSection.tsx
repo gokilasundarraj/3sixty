@@ -4,8 +4,8 @@ import { MdEmail } from 'react-icons/md';
 import { BRAND } from '../lib/constants';
 
 export const ContactSection: React.FC = () => {
-  const whatsappUrl = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent('Hi 3 Sixtey, I want to discuss a project or media requirement.')}`;
-  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(BRAND.email)}&su=${encodeURIComponent('Project / Media Solution Inquiry - 3 Sixtey')}`;
+  const whatsappUrl = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent('Hi 3 Sixty, I want to discuss a project or media requirement.')}`;
+  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(BRAND.email)}&su=${encodeURIComponent('Project / Media Solution Inquiry - 3 Sixty')}`;
 
   return (
     <section id="contact" className="relative py-24 bg-[#070504] border-t border-[#c8714d]/15 select-none">
