@@ -38,7 +38,7 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({ item, onClose }) =
   if (!item) return null;
 
   const whatsappInquiryUrl = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
-    `Hi 3 Sixtey, I saw your work "${item.title}" in the ${item.category} gallery and would like a similar solution.`
+    `Hi 3 Sixty, I saw your work "${item.title}" in the ${item.category} gallery and would like a similar solution.`
   )}`;
 
   return (
