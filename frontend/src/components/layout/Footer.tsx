@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
               <div className="w-10 h-10 rounded-xl p-1 bg-[#120d09] border border-[#c8714d]/40 flex items-center justify-center">
                 <img
                   src="/logo-icon.png"
-                  alt="3 Sixtey"
+                  alt="3 Sixty"
                   className="w-full h-full object-contain"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = '/logo.png';
@@ -164,7 +164,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Credits & Legal */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#b99a8b]">
           <p>
-            &copy; {new Date().getFullYear()} {BRAND.name}.
+            &copy; {new Date().getFullYear()} .3 Sixty – Project and Media Solution
           </p>
 
           {/* REQUIRED EXACT ATTRIBUTION */}
