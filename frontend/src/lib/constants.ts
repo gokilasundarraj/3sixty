@@ -10,7 +10,7 @@ export const BRAND = {
   email: 'projectmediasolutionsixty@gmail.com',
   adminEmail: 'gokilas333@gmail.com',
   address: 'Tamil Nadu, India',
-  founder: 'Kogilasundhararaj',
+  founder: 'Gokilasundharraj',
 };
 
 export const ADMIN_EMAILS = [
