@@ -96,7 +96,7 @@ export const BookOrderSection: React.FC = () => {
               {/* Prominent WhatsApp Button */}
               <a
                 href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
-                  `Hi 3 Sixtey, I want to book an order for a college project / media solution.`
+                  `Hi 3 Sixty, I want to book an order for a college project / media solution.`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
