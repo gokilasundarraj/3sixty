@@ -52,7 +52,7 @@ export const Navbar: React.FC = () => {
           <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl p-1 bg-[#120d09] border border-[#c8714d]/40 shadow-[0_0_15px_rgba(240,160,122,0.25)] group-hover:border-[#f0a07a] group-hover:shadow-[0_0_22px_rgba(240,160,122,0.5)] transition-all duration-300 overflow-hidden flex items-center justify-center">
             <img
               src="/logo-icon.png"
-              alt="3 Sixtey"
+              alt="3 Sixty"
               className="w-full h-full object-contain filter drop-shadow-[0_2px_4px_rgba(240,160,122,0.3)] group-hover:scale-105 transition-transform duration-300"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = '/logo.png';
